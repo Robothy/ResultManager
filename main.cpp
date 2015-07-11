@@ -1,6 +1,6 @@
 #include "main.h"
 
-#define test_bstree
+//#define test_bstree
 
 int main(void)
 {
