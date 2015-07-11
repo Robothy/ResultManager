@@ -1,0 +1,16 @@
+COMMAND											|		OUTPUT																		|
+												|
+rm												|
+rm score <score>								|		删除该分数下所有学生信息													|	输出"删除失败"或"删除成功，删除了几个学生"
+rm score <score> stu_id <student_id>			|		删除分数为score，学号为stu_id 的学生信息									|	输出"删除失败"或"或删除成功"
+rm student <student_id>							|		删除学号为stu_id的学生的信息
+												|
+find											|
+find score <score>
+find stu <stu_id>
+												|
+insert											|
+												|
+count											|
+												|
+print											|
