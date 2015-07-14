@@ -1,16 +1,40 @@
-COMMAND											|		OUTPUT																		|
-												|
-rm												|
-rm score <score>								|		删除该分数下所有学生信息													|	输出"删除失败"或"删除成功，删除了几个学生"
-rm score <score> stu_id <student_id>			|		删除分数为score，学号为stu_id 的学生信息									|	输出"删除失败"或"或删除成功"
-rm student <student_id>							|		删除学号为stu_id的学生的信息
-												|
-find											|
-find score <score>
-find stu <stu_id>
-												|
-insert											|
-												|
-count											|
-												|
-print											|
+command							annotation					output
+
+
+start this system :
+
+new <file_name>						create a new file named <file_name>		no output(user begin to operate this file) | this file is existed,would want to overwrite this file?(Y	N)
+open <file_name>					open an file whose suffix is ".cj"		no outout(user begin to operate this file) | file does not existed
+
+rm <file_name>						remove an file named <file_name>		no output
+
+exit							exit the system					no output
+
+
+file has been opened :
+
+open <file_name>					open an file whose suffix is ".cj"		no outout(user begin to operate this file) | file does not existed
+
+rm <file_name>						remove an file named <file_name>		no output
+
+insert score <score>					insert a tree node into the tree		no output
+
+rm score <score>					remove an tree node				no output
+
+find score <score>					search <score> in the tree			no output | print the linked list in this tree node
+
+find score <scoreA> <scoreB>
+
+insert student <student_msg>				insert a student into tree node according to score	no output
+
+rm student <student|stu_name>				remove a student
+
+rm student <std_id|stu_name> <score>			remove a student by score			no output
+
+find student <stu_id|stu_name>				travers tree , find a student			student_id,student_name,score
+
+find student <stu_id,stu_name> <score>			find a studet by score				student_id,stu_name,score
+
+commmit							save the tree					no output
+
+exit							exit the system					no output

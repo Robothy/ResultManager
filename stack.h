@@ -1,7 +1,7 @@
 #ifndef SATCK_H_INCLUDED
 #define SATCK_H_INCLUDED
 
-///º¯ÊýÔ­ÐÍ
+///
 bool stack_push(pStack &S,pBSTree &e);
 bool stack_pop(pStack &S,pBSTree &e);
 bool print_stack(pStack &S);

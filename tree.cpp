@@ -1,6 +1,5 @@
-#include "variable.h"
-#include "link.h"
-#include "stack.h"
+#include "tree.h"
+
 
 bool insert_tree_node(pBSTree &BST,pBSTree &NODE)
 {
@@ -43,10 +42,7 @@ void Tree_Init(pBSTree &BST)
     unsigned int len = sizeof(d)/sizeof(unsigned int);
     for(int i = 0 ; i < len ; i++)
     {
-        e = (pBSTree)malloc(sizeof(BSTree));
-        e->score=d[i];
-        e->next=NULL;
-        e->stu_quantity=0;
+    	pBSTree e=build_tree_node(d[i]);
         insert_tree_node(BST,e);
     }
 }
@@ -121,6 +117,7 @@ bool remove_tree_node(pBSTree &BST,unsigned int score)
 			return true;
 		}
 	}
+	return false;
 }
 
 pBSTree find_tree_node(pBSTree &BST,unsigned int score)
@@ -185,17 +182,25 @@ void mid_order_tree(pBSTree &BST)
 	printf("\n");
 }
 
+pBSTree build_tree_node(unsigned int score)
+{
+	pBSTree NODE=(pBSTree)malloc(sizeof(BSTree));
+	NODE->score=score;
+	NODE->lchild=NULL;
+	NODE->rchild=NULL;
+	NODE->next=(pLink)malloc(sizeof(Link));
+	NODE->next->next=NULL;
+	NODE->stu_quantity=0;
+	return NODE;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+bool free_tree(pBSTree &BST)
+{
+	pBSTree p=BST;
+	if(!p) return true;
+	free_tree(BST->lchild);
+	free_tree(BST->rchild);
+	free(p);
+	BST=NULL;
+	return true;
+}

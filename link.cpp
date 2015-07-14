@@ -49,18 +49,26 @@ bool remove_link_node(pLink &L,char *str)
 	return true;
 }
 
+pLink find_link_node(pLink &L,char *str)
+{
+	if(!L) return NULL;
+	pLink p=L->next;
+	while(p)
+	{
+		if(!strcmp(str,p->stu_id)||!strcmp(str,p->stu_name)) break;
+		p=p->next;
+	}
+	return p;
+}
+
 ///打印整个链表
 void print_link(pLink &L)
 {
     if(!L) return;
     pLink p=L->next;
-    unsigned int i=0;
-    printf("\nrow_num\tstudent_id\tstudent_name\n");
-    printf("-------\t----------\t-------------------\n");
     while(p)
 	{
-		i++;
-		printf("%d\t%s\t%s\n",i,p->stu_id,p->stu_name);
+		printf("%s\t%s\n",p->stu_id,p->stu_name);
 		p=p->next;
 	}
 }
@@ -77,6 +85,14 @@ void free_link(pLink &L)
 	}
 }
 
+pLink build_link_node(char *&stu_id,char *&stu_name)
+{
+	pLink link_node=(pLink)malloc(sizeof(Link));
+	strcpy(link_node->stu_id,stu_id);
+	strcpy(link_node->stu_name,stu_name);
+	link_node->next=NULL;
+	return link_node;
+}
 
 
 
