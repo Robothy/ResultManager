@@ -1,8 +1,6 @@
 #ifndef OP_H_INCLUDED
 #define OP_H_INCLUDED
 
-#include "tree.h"
-#include "link.h"
 #include "fileop.h"
 
 
@@ -14,9 +12,21 @@ unsigned int str_to_int(char*str);
 bool cmd_init(pCmm &cmd);
 bool show_cmd_msg(pCmm &cmd);
 
-///²Ù×÷
 bool open_file(pOperate &OP,pCmm &cmd);
+bool rm_a_score(pOperate &OP,pCmm &cmd);
+bool save_file(pOperate &OP,pCmm &cmd);
+bool rm_some_score(pOperate &OP,pCmm &cmd);
+void rm_a_stu_score(pOperate &OP,pCmm &cmd);
+bool remove_file(pOperate &OP,pCmm &cmd);
+bool rm_a_student(pOperate &OP,pCmm &cmd);
+bool find_a_score(pOperate &OP,pCmm &cmd);
+bool find_some_score(pOperate &OP,pCmm &cmd);
+bool find_a_stu_score(pOperate &OP,pCmm &cmd);
+bool find_a_student(pOperate &OP,pCmm &cmd);
+bool insert_a_score(pOperate &OP,pCmm &cmd);
+bool insert_a_stu_score(pOperate &OP,pCmm &cmd);
 
+void print_welcome(void);
 
 #include "op.cpp"
 

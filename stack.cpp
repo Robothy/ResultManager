@@ -1,4 +1,3 @@
-#include "variable.h"
 #include "stack.h"
 
 bool stack_push(pStack &S,pBSTree &e)					///½øÕ»

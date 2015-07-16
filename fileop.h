@@ -1,8 +1,6 @@
 #ifndef FILEOP_H_INCLUDED
 #define FILEOP_H_INCLUDED
 
-#include "stdio.h"
-#include "stack.h"
 #include "tree.h"
 
 

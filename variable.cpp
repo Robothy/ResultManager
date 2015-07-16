@@ -1,6 +1,5 @@
 #include "variable.h"
 
-
 using namespace std;
 
 struct link
@@ -53,6 +52,3 @@ struct cmm
 	unsigned int code;			///±íÊ¾´úÂë
 	char cmd_str[40];
 };
-
-
-

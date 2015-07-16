@@ -2,6 +2,7 @@
 
 bool operate_init(pOperate &OP)
 {
+	if(!OP)
 	OP = (pOperate)malloc(sizeof(Operate));
 	OP->BST = NULL;
 	OP->is_op_file=false;
@@ -25,6 +26,7 @@ pCmm get_command(pOperate &OP)
 	pCmm cmd=NULL;
 	cmd_init(cmd);
 	strcpy(cmd->cmd_str,cmd_str);
+	if(count_char(cmd_str,' ')>4)	return cmd;
 	while('\0'!=cmd_str[i])
 	{
 		if(' '==cmd_str[i])
@@ -230,6 +232,7 @@ bool show_cmd_msg(pCmm &cmd)
 
 bool open_file(pOperate &OP,pCmm &cmd)
 {
+	operate_init(OP);
 	if(!open_report_card(OP->BST,cmd->file_name))			///创建新文件
 	{
 		char *file_name=(char*)malloc(20*sizeof(char));
@@ -245,11 +248,17 @@ bool open_file(pOperate &OP,pCmm &cmd)
 
 bool rm_a_score(pOperate &OP,pCmm &cmd)
 {
-	if(remove_tree_node(OP->BST,cmd->parameter_score_a))
+	pBSTree p = find_tree_node(OP->BST,cmd->parameter_score_a);
+	if(p)
 	{
-		OP->count_rm_score++;
-		return true;
+		OP->count_rm_stu+=p->stu_quantity;
+		if(remove_tree_node(OP->BST,cmd->parameter_score_a))
+		{
+			OP->count_rm_score++;
+			return true;
+		}
 	}
+
 	else return false;
 }
 
@@ -384,13 +393,22 @@ bool find_a_stu_score(pOperate &OP,pCmm &cmd)
 {
     pBSTree NODE=NULL;
     pLink p=NULL;
+    bool is_finded=false;
     if((NODE=find_tree_node(OP->BST,cmd->parameter_score_a))!=NULL)
-    if((p=find_link_node(NODE->next,cmd->parameter_stu))!=NULL)
 	{
-		printf("score = %d\t%s\t%s\n",cmd->parameter_score_a,p->stu_id,p->stu_name);
-		return true;
+		if(!(NODE->next)) return false;
+		pLink p=NODE->next->next;
+		while(p)
+		{
+			if(!strcmp(cmd->parameter_stu,p->stu_id)||!strcmp(cmd->parameter_stu,p->stu_name))
+			{
+				printf("score = %d\t%s\t%s\n",cmd->parameter_score_a,p->stu_id,p->stu_name);
+				is_finded=true;
+			}
+			p=p->next;
+		}
 	}
-	return false;
+	return is_finded;
 }
 
 bool find_a_student(pOperate &OP,pCmm &cmd)
@@ -435,12 +453,19 @@ bool insert_a_stu_score(pOperate &OP,pCmm &cmd)
 	pLink link_node=build_link_node(stu_id,stu_name);
     insert_a_score(OP,cmd);
     NODE=find_tree_node(OP->BST,cmd->parameter_score_a);
-
-    insert_link_node(NODE->next,link_node);
-    OP->count_insert_stu++;
+    if(insert_link_node(NODE->next,link_node))
+	{
+		NODE->stu_quantity++;
+		OP->count_insert_stu++;
+	}
     return true;
 }
 
 
-
+void print_welcome(void)
+{
+	system("cls");
+	printf("The Student Result Management [Version 1.0]\n");
+	printf("Copyright (c) 2015 1312441117 罗福享\n");
+}
 

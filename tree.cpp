@@ -1,6 +1,5 @@
 #include "tree.h"
 
-
 bool insert_tree_node(pBSTree &BST,pBSTree &NODE)
 {
     if(!NODE) return false;
@@ -21,30 +20,18 @@ bool insert_tree_node(pBSTree &BST,pBSTree &NODE)
             {
                 p=p->rchild;
             }
+            else return false;
         }
         if(NODE->score<q->score)
         {
             q->lchild = NODE;
         }
-        else if(NODE->score>q->score)
+        else
         {
             q->rchild = NODE;
         }
-        else return false;
     }
     return true;
-}
-
-void Tree_Init(pBSTree &BST)
-{
-    unsigned int d[]={8,10,3,6,1,14,4,7,13};
-    pBSTree e=NULL;
-    unsigned int len = sizeof(d)/sizeof(unsigned int);
-    for(int i = 0 ; i < len ; i++)
-    {
-    	pBSTree e=build_tree_node(d[i]);
-        insert_tree_node(BST,e);
-    }
 }
 
 
@@ -55,15 +42,11 @@ bool remove_tree_node(pBSTree &BST,unsigned int score)
 	else
 	{
 		pBSTree p=BST,q=p;
-		while(p)
+		while(p&&score!=p->score)
 		{
-			if(score==p->score) break;
-			else
-			{
-				q=p;
-				if(score>p->score) p=p->rchild;
-				else p=p->lchild;
-			}
+			q=p;
+			if(score>p->score) p=p->rchild;
+			else p=p->lchild;
 		}
 		if(!p) return false;
 		else
@@ -117,7 +100,6 @@ bool remove_tree_node(pBSTree &BST,unsigned int score)
 			return true;
 		}
 	}
-	return false;
 }
 
 pBSTree find_tree_node(pBSTree &BST,unsigned int score)
